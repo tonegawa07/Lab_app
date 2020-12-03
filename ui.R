@@ -8,6 +8,10 @@ shinyUI(
                     "text/comma-separated-values,text/plain",
                     ".csv")
         ),
+        numericInput("stdConc", "std conc. (ppm)", 10),
+        numericInput("dil", "Dilution", 8),
+        numericInput("extVol", "Extraction vol (mL)", 5),
+        actionButton("submit", "OK"),
         downloadButton('downloadData', 'Download')
       ),
       mainPanel(

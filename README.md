@@ -11,6 +11,15 @@
 
 #### 煩雑なコピー＆ペーストが不要なため，人為的ミスの防止と迅速な計算が可能です．
 
+### 起動方法
+以下のコマンドをRコンソールで実行して下さい．  
+※ shinyパッケージをインストールしてある必要があります．
+
+```R
+library(shiny)
+runGitHub("Lab_app", "tonegawa07")
+```
+
 You need to prepare a csv file in the following format.  
 以下の形式のcsvファイルを用意する必要があります．
 

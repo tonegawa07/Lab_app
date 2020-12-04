@@ -3,4 +3,5 @@ library(shinydashboard)
 library(tidyverse)
 library(DT)
 
-source("cal_hplc.R")
+source("./function/cal_hplc.R")
+source("./function/std_plot.R")

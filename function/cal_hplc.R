@@ -9,24 +9,15 @@ cal_hplc = function(std_conc, Dil, Ext_vol, data){
   rawdata = data
   
   # colname
-  names(rawdata)[c(1,2,ncol(rawdata))] <- c("label", "n", "DW")
-  
-  # show std data
-  std_area <-
-    rawdata %>%
-    select(1:(ncol(rawdata)-1)) %>%
-    filter(label == "STD") %>%
-    select(3:(ncol(rawdata)-1))
-  
-  #boxplot(std_area)
+  names(rawdata)[c(1,ncol(rawdata))] <- c("ID", "DW")
   
   
   # Calculation std_area mean
   std_mean <-
     rawdata %>%
     select(1:(ncol(rawdata)-1)) %>%
-    filter(label == "STD") %>%
-    gather(key = key, value = value, 3:(ncol(rawdata)-1), factor_key = T) %>%
+    filter(grepl("STD", ID)) %>%
+    gather(key = key, value = value, 2:(ncol(rawdata)-1), factor_key = T) %>%
     group_by(key) %>%
     summarise(Mean = mean(value)) %>%
     spread(key = key, value = Mean)
@@ -38,9 +29,9 @@ cal_hplc = function(std_conc, Dil, Ext_vol, data){
   # Calculation sample_conc(mg/g)
   sample <-
     rawdata %>%
-    filter(label == "UNK")
+    filter(grepl("UNK", ID))
   
-  for (i in 3:(ncol(sample)-1)) {
+  for (i in 2:(ncol(sample)-1)) {
     item <- colnames(sample[i])
     #print(item)
     col <- paste0(item, "(mg/g DW)")

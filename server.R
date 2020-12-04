@@ -6,6 +6,10 @@ server = function(input, output, session) {
     csv_file = reactive(read.csv(input$rawdata$datapath))
     output$rawdata = DT::renderDataTable(csv_file(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
 
+    # upしたcsvからstdをplot
+    stdPlot = reactive(std_plot(data = csv_file()))
+    output$stdPlot = renderPlot(stdPlot())
+
     # OKボタンを押したら動く
     observeEvent(input$submit, {
 
@@ -22,7 +26,7 @@ server = function(input, output, session) {
       filename = reactive(paste0("Result_", input$rawdata$name)),
       content = function(file) {
           
-          write.csv(result_csv(), file)
+          write.csv(result_csv(), file, quote=FALSE, row.names=FALSE)
       })
     })
   })

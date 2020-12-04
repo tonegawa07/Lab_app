@@ -30,6 +30,7 @@ shinyUI(
               mainPanel(
                 tabsetPanel(type = "tabs",
                             tabPanel("rawdata", DT::dataTableOutput('rawdata')),
+                            tabPanel("std plot", plotOutput("stdPlot", width = 500)),
                             tabPanel("result", DT::dataTableOutput("result"))
                 )
               )

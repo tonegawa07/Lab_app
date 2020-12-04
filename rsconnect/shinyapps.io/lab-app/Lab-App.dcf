@@ -5,9 +5,9 @@ account: lab-app
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3343388
-bundleId: 3937251
+bundleId: 3942476
 url: https://lab-app.shinyapps.io/Lab-App/
-when: 1606986059.81669
+when: 1607075867.44327
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .RData

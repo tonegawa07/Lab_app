@@ -15,7 +15,7 @@ cal_hplc = function(std_conc, Dil, Ext_vol, data){
   # Calculation std_area mean
   std_mean <-
     rawdata %>%
-    select(1:(ncol(rawdata)-1)) %>%
+    dplyr::select(1:(ncol(rawdata)-1)) %>%
     filter(grepl("STD", ID)) %>%
     gather(key = key, value = value, 2:(ncol(rawdata)-1), factor_key = T) %>%
     group_by(key) %>%

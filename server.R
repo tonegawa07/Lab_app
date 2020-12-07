@@ -1,17 +1,17 @@
 server = function(input, output, session) {
   # csvがupされたら動く
-  observeEvent(input$rawdata, {
+  observeEvent(input$hplc_rawdata, {
     
     # csv_fileにupしたcsvを代入
-    csv_file = reactive(read.csv(input$rawdata$datapath))
-    output$rawdata = DT::renderDataTable(csv_file(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
+    csv_file = reactive(read.csv(input$hplc_rawdata$datapath))
+    output$hplc_rawdata = DT::renderDataTable(csv_file(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
 
     # upしたcsvからstdをplot
     stdPlot = reactive(std_plot(data = csv_file()))
     output$stdPlot = renderPlot(stdPlot())
 
     # OKボタンを押したら動く
-    observeEvent(input$submit, {
+    observeEvent(input$hplc_submit, {
 
       stdConc = input$stdConc
       dil         = input$dil
@@ -20,14 +20,39 @@ server = function(input, output, session) {
       # result_csvに計算後のcsvを代入
       result_csv = reactive(cal_hplc(std_conc = stdConc, Dil = dil, Ext_vol = extVol, data = csv_file()))
       # resultタブに結果を表示
-      output$result = DT::renderDataTable(result_csv(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
+      output$hplc_result = DT::renderDataTable(result_csv(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
       
-      output$downloadData = downloadHandler(
-      filename = reactive(paste0("Result_", input$rawdata$name)),
+      output$hplc_downloadData = downloadHandler(
+      filename = reactive(paste0("Result_", input$hplc_rawdata$name)),
       content = function(file) {
           
           write.csv(result_csv(), file, quote=FALSE, row.names=FALSE)
       })
     })
   })
+
+  # csvがupされたら動く
+  observeEvent(input$tukey_rawdata, {
+    
+    # csv_fileにupしたcsvを代入
+    csv_file = reactive(read.csv(input$tukey_rawdata$datapath))
+    output$tukey_rawdata = DT::renderDataTable(csv_file(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
+
+    observeEvent(input$tukey_table_submit, {
+      
+      Level = input$tukey_p
+
+      result_csv = reactive(tukey_table(data = csv_file(), level = Level))
+
+      output$tukey_table_result = DT::renderDataTable(result_csv(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
+
+      output$tukey_downloadData = downloadHandler(
+      filename = reactive(paste0("Tukey_", input$tukey_rawdata$name)),
+      content = function(file) {
+          
+          write.csv(result_csv(), file, quote=FALSE, row.names=FALSE)
+      })
+    })
+  })
+
 }

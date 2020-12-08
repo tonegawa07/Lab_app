@@ -106,7 +106,7 @@ runGitHub("Lab_app", "tonegawa07")
 #### 2. "Choose CSV File"の欄から用意したcsvファイルをupします．
 "rawdata"タブでupしたデータを確認することができます．
 
-#### 3. "Significancelevel (p-value)"で有意水準を設定し，"Make tukey table"ボタンをクリックします．
+#### 3. "Significancelevel (p-value)"で有意水準を設定し，"Create a tukey table"ボタンをクリックします．
 "tukey table"タブにテーブルが表示されています．
 
 #### 4. "Download"ボタンをクリックします．

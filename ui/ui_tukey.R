@@ -8,7 +8,7 @@ ui_tukey =
                   ".csv")
       ),
       numericInput("tukey_p", "Significance level (p-value)", min = 0, max = 0.1, value = 0.05, step = 0.01),
-      actionButton("tukey_table_submit", "Make tukey table"),
+      actionButton("tukey_table_submit", "Create a tukey table"),
       downloadButton('tukey_downloadData', 'Download')
     ),
     mainPanel(

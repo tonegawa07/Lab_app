@@ -29,9 +29,9 @@ tw_anova <- function(target, class, data){
     data.frame(p=result_df$`Pr(>F)`) %>%
     na.omit() %>%
     mutate(!!col := case_when(
-      p<0.001~"<0.001",
-      p<0.01~"<0.01",
-      p<0.05~"<0.05",
+      p<0.001~"< 0.001",
+      p<0.01~"< 0.01",
+      p<0.05~"< 0.05",
       p>=0.05~"n.s."
     )) %>%
     dplyr::select(2)

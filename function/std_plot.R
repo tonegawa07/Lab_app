@@ -1,16 +1,15 @@
 std_plot = function(data) {
-
-  rawdata = data
   
-  # colname
-  names(rawdata)[c(1,ncol(rawdata))] <- c("ID", "DW")
+  # 列名を変換
+  names(data)[c(1,ncol(data))] <- c("ID", "DW")
 
-  # show std data
+  # STDの値を取得
   std_area <-
-    rawdata %>%
-    dplyr::select(1:(ncol(rawdata)-1)) %>%
+    data %>%
+    dplyr::select(1:(ncol(data)-1)) %>%
     filter(grepl("STD", ID)) %>%
-    dplyr::select(2:(ncol(rawdata)-1))
+    dplyr::select(2:(ncol(data)-1))
     
+    # STDの値を箱ひげ図でプロットし，返す
     return(boxplot(std_area))
 }

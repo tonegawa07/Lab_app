@@ -1,9 +1,12 @@
 server = function(input, output, session) {
+
+  # cal_hplc
   # csvがupされたら動く
   observeEvent(input$hplc_rawdata, {
     
     # csv_fileにupしたcsvを代入
     csv_file = reactive(read.csv(input$hplc_rawdata$datapath))
+    # rawdataをoutputする
     output$hplc_rawdata = DT::renderDataTable(csv_file(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
 
     # upしたcsvからstdをplot
@@ -31,11 +34,13 @@ server = function(input, output, session) {
     })
   })
 
+  # tukey
   # csvがupされたら動く
   observeEvent(input$tukey_rawdata, {
     
     # csv_fileにupしたcsvを代入
     csv_file = reactive(read.csv(input$tukey_rawdata$datapath))
+    # rawdataをoutputする
     output$tukey_rawdata = DT::renderDataTable(csv_file(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
 
     observeEvent(input$tukey_table_submit, {
@@ -52,6 +57,27 @@ server = function(input, output, session) {
           
           write.csv(result_csv(), file, quote=FALSE, row.names=FALSE)
       })
+    })
+  })
+
+  # two-way_ANOVA
+  # csvがupされたら動く
+  observeEvent(input$tw_anova_rawdata, {
+    
+    # csv_fileにupしたcsvを代入
+    csv_file = reactive(read.csv(input$tw_anova_rawdata$datapath))
+    # rawdataをoutputする
+    output$tw_anova_rawdata = DT::renderDataTable(csv_file(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
+
+    result_csv = reactive(tw_anova_table(data = csv_file()))
+
+    output$tw_anova_table_result = DT::renderDataTable(result_csv(), options = list(pageLength = 100, scrollX = TRUE, scrollY = TRUE, scrollCollapse = TRUE))
+
+    output$tw_anova_downloadData = downloadHandler(
+    filename = reactive(paste0("tw_anova_", input$tw_anova_rawdata$name)),
+    content = function(file) {
+        
+        write.csv(result_csv(), file, quote=FALSE, row.names=FALSE)
     })
   })
 

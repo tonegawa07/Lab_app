@@ -7,6 +7,7 @@ shinyUI(
         menuItem("Calculation of HPLC data", tabName = "cal_hplc"),
         menuItem("Statistical tests", 
                         menuSubItem("Tukey", tabName = "tukey"),
+                        menuSubItem("Two-way ANOVA", tabName = "tw_anova"),
                         menuSubItem("Other tests", tabName = "stat_test"))
         )
       ),
@@ -19,6 +20,10 @@ shinyUI(
 
           tabItem(tabName = "tukey",
             ui_tukey
+                      ),
+
+          tabItem(tabName = "tw_anova",
+            ui_tw_anova
                       ),
 
           tabItem(tabName = "stat_test",

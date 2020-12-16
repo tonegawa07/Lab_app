@@ -11,7 +11,8 @@ ui_cal_hplc =
       numericInput("dil", "Dilution", 8),
       numericInput("extVol", "Extraction vol (mL)", 5),
       actionButton("hplc_submit", "Calculation"),
-      downloadButton('hplc_downloadData', 'Download')
+      downloadButton('hplc_downloadData', 'Download'),
+      tags$a(href = "https://github.com/tonegawa07/Lab_app/blob/master/README.md#anchor2-1", "How to use", target="_blank", rel="noopener")
     ),
     mainPanel(
       tabsetPanel(type = "tabs",

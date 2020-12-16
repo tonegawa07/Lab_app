@@ -8,7 +8,8 @@ shinyUI(
         menuItem("Statistical tests", 
                         menuSubItem("Tukey", tabName = "tukey"),
                         menuSubItem("Two-way ANOVA", tabName = "tw_anova"),
-                        menuSubItem("Other tests", tabName = "stat_test"))
+                        menuSubItem("Other tests", tabName = "stat_test")),
+        menuItem("Infomation", tabName = "infomation")
         )
       ),
       dashboardBody(
@@ -30,6 +31,14 @@ shinyUI(
             box(
               title = "Coming soon"
             )
+                      ),
+
+          tabItem(tabName = "infomation",
+            box(
+              title = "Infomation",
+              tags$p("If you don't know how to use."),
+              tags$a(href = "https://github.com/tonegawa07/Lab_app/blob/master/README.md", "Click here.", target="_blank", rel="noopener")
+              )
           )
         )
 

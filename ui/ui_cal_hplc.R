@@ -7,7 +7,7 @@ ui_cal_hplc =
                   "text/comma-separated-values,text/plain",
                   ".csv")
       ),
-      numericInput("stdConc", "std conc. (ppm)", 10),
+      numericInput("stdConc", "STD conc. (ppm)", 10),
       numericInput("dil", "Dilution", 8),
       numericInput("extVol", "Extraction vol (mL)", 5),
       actionButton("hplc_submit", "Calculation"),

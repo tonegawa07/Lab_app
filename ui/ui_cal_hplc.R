@@ -8,7 +8,7 @@ ui_cal_hplc =
                   ".csv")
       ),
       numericInput("stdConc", "STD conc. (ppm)", 10),
-      numericInput("dil", "Dilution", 8),
+      numericInput("dil", "Dilution", 1.25),
       numericInput("extVol", "Extraction vol (mL)", 5),
       actionButton("hplc_submit", "Calculation"),
       downloadButton('hplc_downloadData', 'Download'),

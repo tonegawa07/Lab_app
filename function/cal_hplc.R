@@ -7,6 +7,15 @@ cal_hplc = function(std_conc, Dil, Ext_vol, data){
   # パラメータに基づき"f"に代入
   f <- std_conc*Dil*(Ext_vol/1000)
   
+  data=
+    data %>%
+    dplyr::mutate_all(~gsub(.,pattern="-----",replacement = NA)) %>%
+    dplyr::mutate_all(~gsub(.,pattern=",",replacement = ""))
+  
+  for (i in 2:ncol(data)) {
+    data[,i]<-as.numeric(data[,i])
+  }
+  
   # 列名を変換
   names(data)[c(1,ncol(data))] <- c("ID", "DW")
   
